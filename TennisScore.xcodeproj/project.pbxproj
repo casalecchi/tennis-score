@@ -12,6 +12,8 @@
 		64BC01F02E32B6B700FD9C30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64BC01EF2E32B6B700FD9C30 /* Assets.xcassets */; };
 		64BC01F42E32B6B700FD9C30 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64BC01F32E32B6B700FD9C30 /* Preview Assets.xcassets */; };
 		64BC01FB2E37027400FD9C30 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC01FA2E37027400FD9C30 /* Game.swift */; };
+		64BC01FD2E3A9D9000FD9C30 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC01FC2E3A9D9000FD9C30 /* HomeView.swift */; };
+		64BC01FF2E4E300600FD9C30 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC01FE2E4E300600FD9C30 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		64BC01F12E32B6B700FD9C30 /* TennisScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TennisScore.entitlements; sourceTree = "<group>"; };
 		64BC01F32E32B6B700FD9C30 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		64BC01FA2E37027400FD9C30 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		64BC01FC2E3A9D9000FD9C30 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		64BC01FE2E4E300600FD9C30 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				64BC01EB2E32B6B400FD9C30 /* TennisScoreApp.swift */,
 				64BC01ED2E32B6B400FD9C30 /* ContentView.swift */,
+				64BC01FC2E3A9D9000FD9C30 /* HomeView.swift */,
+				64BC01FE2E4E300600FD9C30 /* Card.swift */,
 				64BC01FA2E37027400FD9C30 /* Game.swift */,
 				64BC01EF2E32B6B700FD9C30 /* Assets.xcassets */,
 				64BC01F12E32B6B700FD9C30 /* TennisScore.entitlements */,
@@ -143,6 +149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				64BC01EE2E32B6B400FD9C30 /* ContentView.swift in Sources */,
+				64BC01FD2E3A9D9000FD9C30 /* HomeView.swift in Sources */,
+				64BC01FF2E4E300600FD9C30 /* Card.swift in Sources */,
 				64BC01FB2E37027400FD9C30 /* Game.swift in Sources */,
 				64BC01EC2E32B6B400FD9C30 /* TennisScoreApp.swift in Sources */,
 			);
