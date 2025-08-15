@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var game = TennisGame(bestOfSets: 5)
+    @State var game = TennisGame(totalSets: 3)
     
     var body: some View {
         VStack {
@@ -55,7 +55,7 @@ struct ScoreNumber: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .border(Color.black)
             .font(.system(size: 64))
-            .background(Color.blue)
+            .background(Color.background)
     }
 }
 

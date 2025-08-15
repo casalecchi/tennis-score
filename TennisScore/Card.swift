@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CardChrome: ViewModifier {
+struct CardStyle: ViewModifier {
     var maxWidth: CGFloat = 400
     var maxHeight: CGFloat? = 200
     var cornerRadius: CGFloat = 16
@@ -30,11 +30,22 @@ struct CardChrome: ViewModifier {
 }
 
 extension View {
-    func cardChrome(
+    func cardStyle(
         maxWidth: CGFloat = 400,
         maxHeight: CGFloat? = 200,
         cornerRadius: CGFloat = 16
     ) -> some View {
-        modifier(CardChrome(maxWidth: maxWidth, maxHeight: maxHeight, cornerRadius: cornerRadius))
+        modifier(CardStyle(maxWidth: maxWidth, maxHeight: maxHeight, cornerRadius: cornerRadius))
+    }
+}
+
+struct Card<Content: View>: View {
+    var maxWidth: CGFloat = 400
+    var maxHeight: CGFloat? = 200
+    var cornerRadius: CGFloat = 16
+    @ViewBuilder var content: () -> Content
+
+    var body: some View {
+        content().cardStyle(maxWidth: maxWidth, maxHeight: maxHeight, cornerRadius: cornerRadius)
     }
 }

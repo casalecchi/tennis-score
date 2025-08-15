@@ -13,6 +13,8 @@ enum Point: Equatable {
 
 enum Side { case a, b }
 
+enum Tab: Hashable { case home, score }
+
 struct Player {
     let id = UUID()
     var points: Point = .love
@@ -39,7 +41,7 @@ struct TennisGame {
     var playerA = Player()
     var playerB = Player()
     
-    var bestOfSets: Int
+    var totalSets: Int
     
     var history = Array<Array<Int>>()
     
@@ -110,7 +112,7 @@ struct TennisGame {
         opponent.games = 0
         player.sets += 1
         
-        if player.sets == Int(bestOfSets / 2) + 1 {
+        if player.sets == Int(totalSets / 2) + 1 {
             write(player, opponent, side)
             end()
         }
@@ -136,5 +138,7 @@ struct TennisGame {
             playerA = opponent
         }
     }
+    
+    static let possibleSets = [1, 3, 5, 7]
 }
 
