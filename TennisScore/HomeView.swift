@@ -6,26 +6,69 @@ struct HomeView: View {
     @State var playerA = "Player 1"
     @State var playerB = "Player 2"
     @State var totalSets = 1
-    
+
+    // quem está em edição agora?
+    enum EditingCard { case players, sets, serve }
+    @State private var editing: EditingCard? = nil
+
     var body: some View {
         NavigationStack {
-            VStack {
-                PlayersCard(playerA: $playerA, playerB: $playerB)
-                HStack {
-                    SetCard(totalSets: $totalSets)
-                    ServeCard(server: $firstServer, playerA: $playerA, playerB: $playerB)
+            ZStack {
+                if editing != nil {
+                    Color.clear
+                        .ignoresSafeArea()
+                        .contentShape(Rectangle())
+                        .onTapGesture { editing = nil }
+                        .zIndex(0) // <- abaixo dos cards
                 }
-                Spacer()
-                PlayButton()
+                VStack {
+                    PlayersCard(
+                        isEditing: Binding(
+                            get: { editing == .players },
+                            set: { $0 ? editing = .players : (editing == .players ? editing = nil : ()) }
+                        ),
+                        playerA: $playerA,
+                        playerB: $playerB
+                    )
+                    .zIndex(editing == .players ? 1 : 0)
+
+                    HStack {
+                        SetCard(
+                            isEditing: Binding(
+                                get: { editing == .sets },
+                                set: { $0 ? editing = .sets : (editing == .sets ? editing = nil : ()) }
+                            ),
+                            totalSets: $totalSets
+                        )
+                        .zIndex(editing == .sets ? 1 : 0)
+
+                        ServeCard(
+                            isEditing: Binding(
+                                get: { editing == .serve },
+                                set: { $0 ? editing = .serve : (editing == .serve ? editing = nil : ()) }
+                            ),
+                            server: $firstServer,
+                            playerA: $playerA,
+                            playerB: $playerB
+                        )
+                        .zIndex(editing == .serve ? 1 : 0)
+                    }
+
+                    Spacer()
+                    PlayButton(playerA: playerA, playerB: playerB, sets: totalSets, firstServer: firstServer)
+                }
+                .padding()
+                .animation(.spring(response: 0.28, dampingFraction: 0.85), value: editing)
+
             }
-            .padding()
             .navigationTitle("Settings")
         }
     }
 }
 
+
 struct PlayersCard: View {
-    @State private var isEditing = false
+    @Binding var isEditing: Bool
     @Binding var playerA: String
     @Binding var playerB: String
     
@@ -48,12 +91,6 @@ struct PlayersCard: View {
                                         .textFieldStyle(.roundedBorder)
                                     TextField("Tap the name of Player 2", text: $playerB)
                                         .textFieldStyle(.roundedBorder)
-                                }
-                                Button {
-                                    isEditing = false
-                                } label: {
-                                    Image(systemName: "checkmark")
-                                        .font(.title)
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -78,7 +115,7 @@ struct PlayersCard: View {
 }
 
 struct SetCard: View {
-    @State private var isEditing = false
+    @Binding var isEditing: Bool
     @Binding var totalSets: Int
     
     var body: some View {
@@ -99,14 +136,6 @@ struct SetCard: View {
                                     Text("\(totalSets)")
                                         .font(.largeTitle)
                                     Stepper("teste", value: $totalSets, in: 1...7, step: 2)
-                                }
-                                Button {
-                                    withAnimation(.spring(response: 0.28, dampingFraction: 0.85)) {
-                                        isEditing = false
-                                    }
-                                } label: {
-                                    Image(systemName: "checkmark")
-                                        .font(.title)
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -133,7 +162,7 @@ struct SetCard: View {
 }
 
 struct ServeCard: View {
-    @State private var isEditing = false
+    @Binding var isEditing: Bool
     @Binding var server: Side
     @Binding var playerA: String
     @Binding var playerB: String
@@ -157,15 +186,6 @@ struct ServeCard: View {
                                     Text(playerB).tag(Side.b)
                                 }
                                 .pickerStyle(.wheel)
-                                
-                                Button {
-                                    withAnimation(.spring(response: 0.28, dampingFraction: 0.85)) {
-                                        isEditing = false
-                                    }
-                                } label: {
-                                    Image(systemName: "checkmark")
-                                        .font(.title)
-                                }
                             }
                         } else {
                             Text(server == .a ? playerA : playerB)
@@ -191,9 +211,14 @@ struct ServeCard: View {
 }
 
 struct PlayButton: View {
+    let playerA: String
+    let playerB: String
+    let sets: Int
+    let firstServer: Side
+    
     var body: some View {
         NavigationLink {
-            ContentView()
+            ContentView(game: TennisGame(playerA: Player(name: playerA), playerB: Player(name: playerB), serveSide: firstServer, totalSets: sets))
         } label: {
             Label("Play Match", systemImage: "play.fill")
                 .font(.headline)

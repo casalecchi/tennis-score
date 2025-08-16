@@ -15,19 +15,27 @@ enum Side { case a, b }
 
 enum Tab: Hashable { case home, score }
 
-struct Player {
+struct SetHistory: Identifiable {
     let id = UUID()
+    let score: Int
+    let winner: Bool
+}
+
+struct Player: Identifiable {
+    let id = UUID()
+    let name: String
     var points: Point = .love
     var games = 0
     var sets = 0
     var tiebreakScore = 0
+    var history: [SetHistory] = []
     
     var labelPoints: String { Self.label(for: points) }
     var labelTiebreak: String { "\(tiebreakScore)" }
     
     static func label(for point: Point) -> String {
         switch point {
-        case .love: return "0"
+        case .love: return "00"
         case .fifteen: return "15"
         case .thirty: return "30"
         case .forty: return "40"
@@ -38,12 +46,12 @@ struct Player {
 
 
 struct TennisGame {
-    var playerA = Player()
-    var playerB = Player()
+    var playerA: Player
+    var playerB: Player
+    
+    var serveSide: Side
     
     var totalSets: Int
-    
-    var history = Array<Array<Int>>()
     
     var isDeuce: Bool { playerA.points == .forty && playerB.points == .forty }
     var isOver = false
@@ -68,7 +76,6 @@ struct TennisGame {
         write(player, opponent, side)
     }
     
-    // chamar função (mudar no front)
     mutating func tiebreakPoint(to side: Side) {
         var (player, opponent) = side == .a ? (playerA, playerB) : (playerB, playerA)
         
@@ -76,6 +83,10 @@ struct TennisGame {
         let winScore = superTiebreak ? 10 : 7
         
         player.tiebreakScore += 1
+        
+        if (player.tiebreakScore + opponent.tiebreakScore) % 2 == 1 {
+            changeServer()
+        }
         
         if player.tiebreakScore - opponent.tiebreakScore >= 2 && player.tiebreakScore >= winScore  {
             player.tiebreakScore = 0
@@ -94,6 +105,7 @@ struct TennisGame {
         player.points = .love
         opponent.points = .love
         player.games += 1
+        changeServer()
         
         if (player.games == 6 && opponent.games < 5) || player.games == 7 {
             write(player, opponent, side)
@@ -107,7 +119,8 @@ struct TennisGame {
     mutating func set(to side: Side) {
         var (player, opponent) = side == .a ? (playerA, playerB) : (playerB, playerA)
         
-        history.append([playerA.games, playerB.games])
+        player.history.append(SetHistory(score: player.games, winner: true))
+        opponent.history.append(SetHistory(score: opponent.games, winner: false))
         player.games = 0
         opponent.games = 0
         player.sets += 1
@@ -124,9 +137,8 @@ struct TennisGame {
         isOver = true
     }
     
-    mutating func reset() {
-        playerA = Player()
-        playerB = Player()
+    private mutating func changeServer() {
+        serveSide = serveSide == .a ? .b : .a
     }
     
     private mutating func write(_ player: Player, _ opponent: Player, _ side: Side) {
@@ -138,7 +150,5 @@ struct TennisGame {
             playerA = opponent
         }
     }
-    
-    static let possibleSets = [1, 3, 5, 7]
 }
 
