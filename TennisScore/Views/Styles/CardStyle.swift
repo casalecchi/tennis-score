@@ -1,3 +1,10 @@
+//
+//  CardStyle.swift
+//  TennisScore
+//
+//  Created by Felipe Casalecchi on 21/09/25.
+//
+
 import SwiftUI
 
 struct CardStyle: ViewModifier {
@@ -39,13 +46,15 @@ extension View {
     }
 }
 
-struct Card<Content: View>: View {
-    var maxWidth: CGFloat = 400
-    var maxHeight: CGFloat? = 200
-    var cornerRadius: CGFloat = 16
-    @ViewBuilder var content: () -> Content
-
-    var body: some View {
-        content().cardStyle(maxWidth: maxWidth, maxHeight: maxHeight, cornerRadius: cornerRadius)
-    }
-}
+//#if DEBUG
+//struct CardStyle_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack {
+//            Text("Hello").cardStyle()
+//            Text("Custom").cardStyle(maxWidth: 300, maxHeight: nil, cornerRadius: 24)
+//        }
+//        .padding()
+//        .background(Color.gray.opacity(0.1))
+//    }
+//}
+//#endif

@@ -3,30 +3,49 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		64BC01EC2E32B6B400FD9C30 /* TennisScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC01EB2E32B6B400FD9C30 /* TennisScoreApp.swift */; };
-		64BC01EE2E32B6B400FD9C30 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC01ED2E32B6B400FD9C30 /* ContentView.swift */; };
 		64BC01F02E32B6B700FD9C30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64BC01EF2E32B6B700FD9C30 /* Assets.xcassets */; };
 		64BC01F42E32B6B700FD9C30 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64BC01F32E32B6B700FD9C30 /* Preview Assets.xcassets */; };
-		64BC01FB2E37027400FD9C30 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC01FA2E37027400FD9C30 /* Game.swift */; };
-		64BC01FD2E3A9D9000FD9C30 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC01FC2E3A9D9000FD9C30 /* HomeView.swift */; };
-		64BC01FF2E4E300600FD9C30 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC01FE2E4E300600FD9C30 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		64BC01E82E32B6B400FD9C30 /* TennisScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TennisScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		64BC01EB2E32B6B400FD9C30 /* TennisScoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisScoreApp.swift; sourceTree = "<group>"; };
-		64BC01ED2E32B6B400FD9C30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		64BC01EF2E32B6B700FD9C30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64BC01F12E32B6B700FD9C30 /* TennisScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TennisScore.entitlements; sourceTree = "<group>"; };
 		64BC01F32E32B6B700FD9C30 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		64BC01FA2E37027400FD9C30 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		64BC01FC2E3A9D9000FD9C30 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		64BC01FE2E4E300600FD9C30 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		646BAD2F2E80D86200C094A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Enums.swift,
+				GameState.swift,
+				Player.swift,
+				SetHistory.swift,
+			);
+			target = 64BC01E72E32B6B400FD9C30 /* TennisScore */;
+		};
+		646BAD312E80D8A000C094A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Rules/TennisRules.swift,
+				Services/StopwatchService.swift,
+			);
+			target = 64BC01E72E32B6B400FD9C30 /* TennisScore */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		646BAD0B2E80D5FB00C094A4 /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+		646BAD1A2E80D84700C094A4 /* Core */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (646BAD312E80D8A000C094A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Core; sourceTree = "<group>"; };
+		646BAD1B2E80D85000C094A4 /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
+		646BAD2A2E80D86200C094A4 /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (646BAD2F2E80D86200C094A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
+		646BAD332E80D8DB00C094A4 /* ViewModels */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModels; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		64BC01E52E32B6B400FD9C30 /* Frameworks */ = {
@@ -58,11 +77,11 @@
 		64BC01EA2E32B6B400FD9C30 /* TennisScore */ = {
 			isa = PBXGroup;
 			children = (
-				64BC01EB2E32B6B400FD9C30 /* TennisScoreApp.swift */,
-				64BC01ED2E32B6B400FD9C30 /* ContentView.swift */,
-				64BC01FC2E3A9D9000FD9C30 /* HomeView.swift */,
-				64BC01FE2E4E300600FD9C30 /* Card.swift */,
-				64BC01FA2E37027400FD9C30 /* Game.swift */,
+				646BAD1B2E80D85000C094A4 /* App */,
+				646BAD2A2E80D86200C094A4 /* Models */,
+				646BAD1A2E80D84700C094A4 /* Core */,
+				646BAD332E80D8DB00C094A4 /* ViewModels */,
+				646BAD0B2E80D5FB00C094A4 /* Views */,
 				64BC01EF2E32B6B700FD9C30 /* Assets.xcassets */,
 				64BC01F12E32B6B700FD9C30 /* TennisScore.entitlements */,
 				64BC01F22E32B6B700FD9C30 /* Preview Content */,
@@ -92,6 +111,11 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				646BAD0B2E80D5FB00C094A4 /* Views */,
+				646BAD1B2E80D85000C094A4 /* App */,
+				646BAD332E80D8DB00C094A4 /* ViewModels */,
 			);
 			name = TennisScore;
 			productName = TennisScore;
@@ -148,11 +172,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64BC01EE2E32B6B400FD9C30 /* ContentView.swift in Sources */,
-				64BC01FD2E3A9D9000FD9C30 /* HomeView.swift in Sources */,
-				64BC01FF2E4E300600FD9C30 /* Card.swift in Sources */,
-				64BC01FB2E37027400FD9C30 /* Game.swift in Sources */,
-				64BC01EC2E32B6B400FD9C30 /* TennisScoreApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
