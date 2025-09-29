@@ -42,13 +42,12 @@ struct DefaultTennisRules: TennisRules {
         
         p.tiebreakScore += 1
         
-        // troca de saque: no tiebreak, troca a cada 2 pontos, iniciando após o 1º ponto
+        // troca de saque - troca a cada ponto ímpar
         if (p.tiebreakScore + o.tiebreakScore) % 2 == 1 {
             state.serveSide = state.serveSide == .a ? .b : .a
         }
         
         if p.tiebreakScore - o.tiebreakScore >= 2 && p.tiebreakScore >= winScore {
-            // terminou o tiebreak -> vira 7-6 ou 10-? no super
             p.tiebreakScore = 0
             o.tiebreakScore = 0
             writeBack(&state, side, p, o)
@@ -58,8 +57,6 @@ struct DefaultTennisRules: TennisRules {
         
         writeBack(&state, side, p, o)
     }
-    
-    // MARK: - Helpers
     
     private func gameWon(state: inout GameState, by side: Side) {
         var (p, o) = players(for: side, in: state)

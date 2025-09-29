@@ -9,16 +9,12 @@ import Foundation
 import Combine
 
 final class TennisGameViewModel: ObservableObject {
-    // Estado publicado para a UI
     @Published private(set) var state: GameState
     @Published private(set) var stopwatchText: String = "00:00"
     @Published private(set) var stopwatchRunning: Bool = false
     
-    // Dependências
     private let rules: TennisRules
     private let stopwatch: StopwatchService
-    
-    private var bag = Set<AnyCancellable>()
     
     init(
         playerAName: String,
@@ -55,8 +51,6 @@ final class TennisGameViewModel: ObservableObject {
         stopwatch.start()
     }
     
-    // MARK: Intents (entrada da View)
-    
     func toggleStopwatch() {
         stopwatchRunning ? stopwatch.pause() : stopwatch.resume()
     }
@@ -67,7 +61,7 @@ final class TennisGameViewModel: ObservableObject {
         : rules.scorePoint(state: &state, to: side)
     }
     
-    // Exposições convenientes para a View (evita mexer no state bruto)
+    // exposições convenientes para a View (evita mexer no state bruto)
     var isOver: Bool { state.isOver }
     var isTiebreak: Bool { state.isTiebreak }
     var serveSide: Side { state.serveSide }

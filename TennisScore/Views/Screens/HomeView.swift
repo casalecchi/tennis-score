@@ -4,7 +4,7 @@ import SwiftUI
 import SwiftUI
 
 struct HomeView: View {
-    @State private var sets: Int = 1
+    @State private var sets: Int = 3
     @State private var firstServer: Side = .a
     @State private var playerA = "Player 1"
     @State private var playerB = "Player 2"
