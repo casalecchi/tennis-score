@@ -11,16 +11,16 @@ struct Card<Content: View>: View {
     }
 }
 
-//#if DEBUG
-//struct Card_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Card {
-//            VStack(alignment: .leading, spacing: 8) {
-//                Text("Título").font(.headline)
-//                Text("Descrição do card…").font(.subheadline)
-//            }
-//        }
-//        .padding()
-//    }
-//}
-//#endif
+#if DEBUG
+struct Card_Previews: PreviewProvider {
+    static var previews: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Título").font(.headline)
+                Text("Descrição do card…").font(.subheadline)
+            }
+        }
+        .padding()
+    }
+}
+#endif

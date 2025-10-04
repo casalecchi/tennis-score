@@ -37,9 +37,14 @@ final class TennisGameViewModel: ObservableObject {
         // Bind stopwatch para propriedades publicadas
         stopwatch.$elapsed
             .map { elapsed -> String in
+                print(elapsed)
                 let t = Int(elapsed)
-                let m = t / 60, s = t % 60
-                return String(format: "%02d:%02d", m, s)
+                let h = t / 3600, m = (t % 3600) / 60, s = t % 60
+                if h > 0 {
+                    return String(format: "%02d:%02d:%02d", h, m, s)
+                } else {
+                    return String(format: "%02d:%02d", m, s)
+                }
             }
             .receive(on: DispatchQueue.main)
             .assign(to: &$stopwatchText)
@@ -47,13 +52,12 @@ final class TennisGameViewModel: ObservableObject {
         stopwatch.$isRunning
             .receive(on: DispatchQueue.main)
             .assign(to: &$stopwatchRunning)
-        
-        stopwatch.start()
     }
     
-    func toggleStopwatch() {
-        stopwatchRunning ? stopwatch.pause() : stopwatch.resume()
-    }
+    func startMatch() { stopwatch.start() }
+    func pauseStopwatch() { stopwatch.pause() }
+    func resumeStopwatch() { stopwatch.resume() }
+    func toggleStopwatch() { stopwatch.isRunning ? stopwatch.pause() : stopwatch.resume() }
     
     func tap(side: Side) {
         state.isTiebreak

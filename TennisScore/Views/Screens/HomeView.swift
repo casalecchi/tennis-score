@@ -14,6 +14,8 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
+            Color.background.ignoresSafeArea()
+            
             if editing != nil {
                 Color.clear
                     .ignoresSafeArea()
@@ -21,7 +23,7 @@ struct HomeView: View {
                     .onTapGesture { editing = nil }
                     .zIndex(0)
             }
-
+            
             VStack {
                 PlayersCard(
                     isEditing: Binding(

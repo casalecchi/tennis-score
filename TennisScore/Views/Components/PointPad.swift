@@ -26,7 +26,7 @@ struct PointPad: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: 200)
-        .background(RoundedRectangle(cornerRadius: 12).fill(Color(.scoreboardBackground)))
+        .background(RoundedRectangle(cornerRadius: 12).fill(Color.background))
         .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).stroke(Color.white.opacity(0.25), lineWidth: 1))
         .onTapGesture { onTap() }
     }

@@ -158,7 +158,7 @@ struct PlayButton: View {
     var body: some View {
         NavigationLink {
             // cria o VM com dependências do Core
-            ContentView(
+            MatchView(
                 vm: TennisGameViewModel(
                     playerAName: playerA,
                     playerBName: playerB,

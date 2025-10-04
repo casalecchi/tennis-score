@@ -16,7 +16,7 @@ struct ScoreText: View {
             .fontWeight(.bold)
             .foregroundStyle(.textPrimary)
             .padding()
-            .background(RoundedRectangle(cornerRadius: 12).fill(Color(.scoreboardBackground)))
+            .background(RoundedRectangle(cornerRadius: 12).fill(Color.background))
             .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).stroke(Color.white.opacity(0.25), lineWidth: 1))
             .frame(maxWidth: .infinity)
     }

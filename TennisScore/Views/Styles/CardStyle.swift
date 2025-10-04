@@ -25,7 +25,7 @@ struct CardStyle: ViewModifier {
             .frame(maxWidth: maxWidth)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .fill(Color(.systemBackground))
+                    .fill(Color.background)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)

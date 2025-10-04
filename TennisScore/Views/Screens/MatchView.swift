@@ -7,18 +7,19 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MatchView: View {
     @StateObject private var vm: TennisGameViewModel
+    @Environment(\.scenePhase) private var scenePhase
 
     init(vm: TennisGameViewModel) {
+        // se torna o dono do ciclo de vida do vm
         _vm = StateObject(wrappedValue: vm)
     }
 
     var body: some View {
         ZStack {
-            Color.scoreboardBackground.ignoresSafeArea()
+            Color.background.ignoresSafeArea()
             VStack {
-                // Stopwatch / Header
                 ZStack {
                     Image(systemName: vm.stopwatchRunning ? "pause" : "play")
                         .font(.title2)
@@ -39,7 +40,6 @@ struct ContentView: View {
                     Spacer()
                 }
 
-                // Players rows
                 VStack(spacing: 1) {
                     PlayerRow(player: vm.playerA, isServing: vm.serveSide == .a, gameEnded: vm.isOver)
                     Divider()
@@ -64,7 +64,6 @@ struct ContentView: View {
 
                 Spacer()
 
-                // Point pads (sem referência direta ao VM, só closures)
                 HStack {
                     PointPad(
                         title: vm.playerA.name,
@@ -81,11 +80,24 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
             .animation(.spring(response: 0.28, dampingFraction: 0.85), value: vm.isOver)
         }
+        .onAppear {
+            vm.startMatch()
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            switch newPhase {
+            case .background, .inactive:
+                vm.pauseStopwatch()
+            case .active:
+                vm.resumeStopwatch()
+            default:
+                break
+            }
+        }
     }
 }
 
 #Preview {
-    ContentView(
+    MatchView(
         vm: TennisGameViewModel(
             playerAName: "Felipe",
             playerBName: "Camila",

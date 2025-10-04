@@ -13,6 +13,7 @@ struct TennisScoreApp: App {
         WindowGroup {
             NavigationStack {
                 HomeView()
+                    .preferredColorScheme(.dark)
             }
         }
     }

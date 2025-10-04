@@ -17,20 +17,24 @@ final class StopwatchService {
     
     var formatted: String {
         let t = Int(elapsed)
-        let m = t / 60, s = t % 60
-        return String(format: "%02d:%02d", m, s)
+        let h = t / 3600, m = (t % 3600) / 60, s = t % 60
+        return String(format: "%02d:%02d:%02d", h, m, s)
     }
     
-    func start() {
-        guard !isRunning else { return }
-        isRunning = true
-        startDate = Date()
+    private func startTimer() {
         timer = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self, let start = self.startDate else { return }
                 self.elapsed = Date().timeIntervalSince(start)
             }
+    }
+    
+    func start() {
+        guard !isRunning else { return }
+        isRunning = true
+        startDate = Date()
+        startTimer()
     }
     
     func pause() {
@@ -42,6 +46,6 @@ final class StopwatchService {
         guard !isRunning else { return }
         isRunning = true
         startDate = Date().addingTimeInterval(-elapsed)
-        start()
+        startTimer()
     }
 }
